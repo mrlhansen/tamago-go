@@ -40,9 +40,9 @@ fi
 GOROOT="$(cd .. && pwd)"
 
 gettargets() {
-	../bin/go tool dist list | sed -e 's|/|-|' |
-		grep -E -v '^(android|ios)' # need C toolchain even for cross-compiling
-	echo linux-arm-arm5
+	# ../bin/go tool dist list | sed -e 's|/|-|' |
+	# 	grep -E -v '^(android|ios)' # need C toolchain even for cross-compiling
+	echo tamago-amd64
 }
 
 selectedtargets() {

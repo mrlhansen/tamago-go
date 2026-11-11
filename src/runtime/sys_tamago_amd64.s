@@ -12,7 +12,7 @@
 
 #define IA32_MSR_FS_BASE 0xc0000100
 
-#define SYS_arch_prctl 158
+#define SYS_wrbase 31
 
 TEXT runtime·rt0_amd64_tamago(SB),NOSPLIT|NOFRAME|TOPFRAME,$0
 	// create istack out of the bootstack
@@ -165,8 +165,8 @@ TEXT runtime·settls(SB),NOSPLIT,$32
 application:
 	ADDQ	$8, DI	// ELF wants to use -8(FS)
 	MOVQ	DI, SI
-	MOVQ	$0x1002, DI	// ARCH_SET_FS
-	MOVQ	$SYS_arch_prctl, AX
+	MOVQ	$0x100, DI	// FS_BASE
+	MOVQ	$SYS_wrbase, AX
 	SYSCALL
 	CMPQ	AX, $0xfffffffffffff001
 	JLS	2(PC)
