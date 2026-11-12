@@ -112,6 +112,8 @@ func Printk(c byte) {}
 // runtime setup (post World start).
 func Hwinit1() {}
 
+func Brk(brk uintptr) int64 { return -1 }
+
 // Optional variables/functions.
 var (
 	// Bloc is an optional variable which can be set in [Hwinit0] to

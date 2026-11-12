@@ -14,15 +14,10 @@ func sbrk(n uintptr) unsafe.Pointer {
 	bl := bloc
 	n = memRound(n)
 	if bl+n > blocMax {
-		switch {
-		case goos.BlocMax > 0:
-			if bl+n > goos.BlocMax {
+		if bl+n > goos.BlocMax {
+			if goos.Brk(uintptr(bl+n)) < 0 {
 				return nil
 			}
-		case bl+n > uintptr(g0.stack.lo):
-			return nil
-		default:
-			memclrNoHeapPointers(unsafe.Pointer(bl), n)
 		}
 		blocMax = bl + n
 	}

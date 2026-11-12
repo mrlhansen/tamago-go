@@ -46,17 +46,19 @@ var (
 	RamStackOffset uint = 0x100
 
 	Bloc    = uintptr(RamStart)
-	BlocMax = uintptr(RamStart+RamSize)
+	BlocMax = uintptr(RamStart + RamSize)
 	Exit    = sys_exit_group
-	Idle   func(until int64)
-	ProcID func() uint64
-	Wake   func(uint64)
+	Idle    func(until int64)
+	ProcID  func() uint64
+	Wake    func(uint64)
 
 	Hwinit0  = func() {}
 	InitRNG  = func() {}
 	Hwinit1  = func() {}
 	Nanotime = sys_clock_gettime
 )
+
+func Brk(brk uintptr) int64 { return -1 }
 
 // defined in linux_user*.s
 func CPUInit()
